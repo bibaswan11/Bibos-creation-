@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"width=device-width, initial-scale=1.0">
+    <title>Bibo's Creation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo">Bibo's Creation</div>
+        <div class="menu-btn" onclick="toggleMenu()">☰</div>
+    </header>
+
+    <nav id="menu">
+        <a href="#">Home</a>
+        <a href="https://wa.me/916290386950" target="_blank">WhatsApp</a>
+        <a href="#">Categories</a>
+        <a href="#">About</a>
+    </nav>
+
+    <h1 class="title">Public Gallery</h1>
+    <div id="gallery" class="gallery"></div>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById("menu").classList.toggle("open");
+        }
+
+        // Load images.json
+        fetch("images.json")
+            .then(response => response.json())
+            .then(data => {
+                let gallery = document.getElementById("gallery");
+                data.forEach(item => {
+                    gallery.innerHTML += `
+                        <div class="card">
+                            <img src="images/${item.file}" alt="${item.desc}">
+                            <p>${item.desc}</p>
+                        </div>
+                    `;
+                });
+            });
+    </script>
+
+</body>
+</html>
